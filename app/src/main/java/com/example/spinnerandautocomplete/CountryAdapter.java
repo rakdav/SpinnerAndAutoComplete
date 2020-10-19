@@ -33,20 +33,18 @@ public class CountryAdapter extends ArrayAdapter<CountryInfo> {
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View row=convertView;
-        if(row==null){
+//        if(row==null){
             LayoutInflater inflater=context.getLayoutInflater();
             row=inflater.inflate(R.layout.spinner_item,parent,false);
-        }
+//        }
         CountryInfo item=Data.get(position);
-        if(item!=null)
-        {
+
             ImageView myFlag=row.findViewById(R.id.countryFlag);
             TextView myCountry=row.findViewById(R.id.contryName);
             TextView myPopulation=row.findViewById(R.id.countryPopulation);
             myFlag.setBackground(context.getResources().getDrawable(item.getCountryFlag()));
             myCountry.setText(item.getCountryName());
             myPopulation.setText(Long.toString(item.getCountryPopulation()));
-        }
         return row;
     }
 }
