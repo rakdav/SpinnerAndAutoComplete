@@ -11,7 +11,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    ArrayList<CountryInfo> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 //        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,cities);
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        spinner.setAdapter(adapter);
-        ArrayList<CountryInfo> list=new ArrayList<>();
+        list=new ArrayList<>();
         list.add(new CountryInfo(R.drawable.gb,4500000,"Great Britain"));
         list.add(new CountryInfo(R.drawable.russia,14500000,"Russia"));
         list.add(new CountryInfo(R.drawable.germany,1500000,"German"));

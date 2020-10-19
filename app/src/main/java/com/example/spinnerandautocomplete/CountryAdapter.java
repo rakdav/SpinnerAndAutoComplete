@@ -17,34 +17,43 @@ import java.util.ArrayList;
 
 public class CountryAdapter extends ArrayAdapter<CountryInfo> {
     private Activity context;
-    private ArrayList<CountryInfo> Data;
-    public CountryAdapter(@NonNull Activity context, int resource, ArrayList<CountryInfo> d) {
-        super(context, resource);
-        this.context=context;
-        Data=d;
+    ArrayList<CountryInfo> data = null;
+
+    public CountryAdapter(Activity context, int resource, ArrayList<CountryInfo> data) {
+        super(context, resource, data);
+        this.context = context;
+        this.data = data;
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    @NonNull
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         return super.getView(position, convertView, parent);
     }
 
     @Override
-    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View row=convertView;
-//        if(row==null){
-            LayoutInflater inflater=context.getLayoutInflater();
-            row=inflater.inflate(R.layout.spinner_item,parent,false);
-//        }
-        CountryInfo item=Data.get(position);
+    public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) { // этот код выполняется, когда вы нажимаете на спиннер
+        View row = convertView;
+        if (row == null) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            row = inflater.inflate(R.layout.spinner_item, parent, false);
+        }
 
-            ImageView myFlag=row.findViewById(R.id.countryFlag);
-            TextView myCountry=row.findViewById(R.id.contryName);
-            TextView myPopulation=row.findViewById(R.id.countryPopulation);
-            myFlag.setBackground(context.getResources().getDrawable(item.getCountryFlag()));
-            myCountry.setText(item.getCountryName());
-            myPopulation.setText(Long.toString(item.getCountryPopulation()));
+        CountryInfo item = data.get(position);
+
+        if (item != null) { // парсим данные с каждого объекта
+            ImageView myFlag = (ImageView) row.findViewById(R.id.countryFlag);
+            TextView myCountry = (TextView) row.findViewById(R.id.contryName);
+            TextView myPopulatin = (TextView) row.findViewById(R.id.countryPopulation);
+            if (myFlag != null) {
+                myFlag.setBackground(context.getResources().getDrawable(item.getCountryFlag(), context.getTheme()));
+            }
+            if (myCountry != null)
+                myCountry.setText(item.getCountryName());
+            if (myPopulatin != null)
+                myCountry.setText(Long.toString(item.getCountryPopulation()));
+        }
+
         return row;
     }
 }
